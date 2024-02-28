@@ -14,3 +14,6 @@ Dev World is a website designed to provide a platform for developers to showcase
 - **Day 6:** Add PUT API endpoints for updating existing project information.
 - **Day 7:** Deploy the backend server to ensure accessibility across different machines.
 - **Day 8:** Design and implement the database schema for storing project data.
+- **Day 9:** Design my frontend Part of the project.
+- **Day 10:** Deploying my frontend Part of the project.
+- **Day 11:** Implementing the connections of my frontend to my backend.
