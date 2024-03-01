@@ -3,12 +3,15 @@ const mongoose = require("mongoose");
 const MediaSchema = new mongoose.Schema({
     projectName: {
         type: String,
+        require
     },
     projectDescription: {
         type: String,
+        require
     },
     deployedLink: {
         type: String,
+        require
     },
     videos: [{
         type: String,

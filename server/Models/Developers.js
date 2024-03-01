@@ -2,16 +2,20 @@ const mongoose = require('mongoose')
 
 const DeveloperSchema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        require
     },
     email: {
-        type: String
+        type: String,
+        require
     },
     password: {
-        type: String
+        type: String,
+        require
     },
     graduationDetails: {
-        type: String
+        type: String,
+        require
     },
     date: {
         type: Date,
