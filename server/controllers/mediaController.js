@@ -1,7 +1,9 @@
 const Media = require("../Models/Media");
 const DevInfo = require("../Models/Developers");
+const UserInfo = require("../Models/Users")
 
 
+// reading media data
 exports.getall = async (req, res) => {
     try {
         const media = await Media.find();
@@ -12,6 +14,8 @@ exports.getall = async (req, res) => {
     }
 };
 
+// reading developer data
+
 exports.getDev = async (req,res) => {
     try{
         const developer = await DevInfo.find();
@@ -21,6 +25,8 @@ exports.getDev = async (req,res) => {
         res.status(500).json({message: 'Server Error'})
     }
 }
+
+// Creating media
 
 exports.create = async (req, res) => {
     const { projectName, projectDescription, deployedLink } = req.body;
@@ -48,6 +54,9 @@ exports.create = async (req, res) => {
     }
 };
 
+
+// creating developer Info 
+
 exports.devInfo = async (req, res) => {
     
     const { name, email, graduationDetails, password } = req.body
@@ -64,5 +73,24 @@ exports.devInfo = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Server Error' });
+    }
+}
+
+// create User
+
+exports.createUser = async(req,res) => {
+    const { name, email, password} = req.body
+    
+    try {
+        const userInfo = await UserInfo.create({
+            name,
+            email,
+            password
+        })
+        
+        res.json({message:"User added successfully!!", userInfo})
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("Server Error")
     }
 }

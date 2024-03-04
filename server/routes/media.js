@@ -55,4 +55,9 @@ router.post('/create', upload.fields([
 
 router.post('/devInfo', mediaController.devInfo)
 
+// enter user data
+
+router.post('/createUser', mediaController.createUser)
+
+
 module.exports = router
