@@ -114,3 +114,28 @@ exports.createUser = async (req, res) => {
         res.status(500).send("Server Error")
     }
 }
+
+// Show Media at the time of update by Id
+
+exports.showById = async (req, res) => {
+    const id = req.params.id
+    // console.log(`JWT Cookie:${req.cookies.jwt}`)
+    Media.findById({ _id: id })
+        .then(media => res.json(media))
+        .catch(err => res.json({ "err": err }))
+}
+
+
+// Update the media data
+
+exports.updateMedia = async (req, res) => {
+    const id = req.params.id
+    Media.findByIdAndUpdate({ _id: id }, {
+        projectName: req.body.projectName,
+        projectDescription: req.body.projectDescription,
+        deployedLink: req.body.deployedLink,
+        videos: req.body.videos
+    })
+        .then(media => res.json({ media, message: "Media Updated Succesfully" }))
+        .catch(err => console.log(err))
+}
