@@ -1,17 +1,21 @@
 const mongoose = require("mongoose");
 
 const MediaSchema = new mongoose.Schema({
+    email:{
+        type: String,
+        trim:true
+    },
     projectName: {
         type: String,
-        require
+        trim:true
     },
     projectDescription: {
         type: String,
-        require
+        trim:true
     },
     deployedLink: {
         type: String,
-        require
+        trim:true
     },
     videos: [{
         type: String,

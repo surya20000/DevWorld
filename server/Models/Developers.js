@@ -3,24 +3,25 @@ const mongoose = require('mongoose')
 const DeveloperSchema = new mongoose.Schema({
     name: {
         type: String,
-        require
+        trim: true
     },
     email: {
         type: String,
-        require
+        trim: true
     },
     password: {
         type: String,
-        require
+        trim: true
     },
-    graduationDetails: {
+    projectname: {
         type: String,
-        require
+        trim: true
     },
     date: {
         type: Date,
         default: Date.now
     }
 })
+
 
 module.exports = DevInfo = mongoose.model("developer", DeveloperSchema)
