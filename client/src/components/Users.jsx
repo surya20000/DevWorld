@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import './PatentForm.Module.css';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Motion from './Motion';
 
 const Users = () => {
 
@@ -14,7 +15,14 @@ const Users = () => {
     const [successMsg, setSuccessMsg] = useState("")
     const [errMsg, seterrMsg] = useState("")
     const navigate = useNavigate()
+    // const [motionOpen, setMotionOpen] = useState(false);
 
+
+    const handleClose = () => {
+        // setMotionOpen(false); // Close the motion
+        setSuccessMsg("");
+        seterrMsg("")
+    };
 
     const handelSubmit = (e) => {
         e.preventDefault()
@@ -39,8 +47,6 @@ const Users = () => {
 
     return (
         <div className="form-container">
-            {successMsg && <p className="success-message">{successMsg}</p>}
-            {errMsg && <p className="error-message">{errMsg}</p>}
             <form>
                 <label htmlFor="name" name="name">Name</label>
                 <input type="text" name='name' required placeholder='name' id='name' onChange={(e) => setName(e.target.value)} />
@@ -53,9 +59,12 @@ const Users = () => {
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.9 }}
                 type='submit'
-                onClick={handelSubmit}> Submit
+                onClick={handelSubmit}
+                > Submit
             </motion.button>
             <Link to='/patentForm'><span className='at'> Sign up as developer </span></Link>
+            {successMsg && <Motion text={successMsg} handleClose={handleClose} />}
+            {errMsg && <Motion text={errMsg} handleClose={handleClose} />}
         </div>
     )
 }

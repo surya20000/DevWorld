@@ -20,7 +20,7 @@ const AnimatedRoutes = () => {
 
     const getAllMedias = () => {
         axios
-            .get(`${backend_Uri}/api/v1/media/all`)
+            .get(`${backend_Uri}/media/all`)
             .then((res) => {
                 setMedias(res.data);
                 console.log(medias);
