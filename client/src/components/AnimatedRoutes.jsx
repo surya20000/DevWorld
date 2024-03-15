@@ -1,5 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import LandingPage from '../components/LandingPage';
+import Users from '../components/Users';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { backend_Uri } from '../config/constants';
@@ -34,6 +35,7 @@ const AnimatedRoutes = () => {
         <div>
             <AnimatePresence>
                 <Routes location={location} key={location.pathname}>
+                    <Route path="/users" element={<Users />} />
                     <Route path="/" element={<LandingPage />} />
                 </Routes>
             </AnimatePresence>
