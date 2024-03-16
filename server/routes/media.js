@@ -62,5 +62,8 @@ router.post('/devInfo', mediaController.devInfo)
 
 router.post('/createUser', mediaController.createUser)
 
+// login  validation
+
+router.post('/login', mediaController.loginValidator)
 
 module.exports = router
