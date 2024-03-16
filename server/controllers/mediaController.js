@@ -4,6 +4,8 @@ const UserInfo = require("../Models/Users")
 const { ValidateDeveloper } = require('../DeveloperValidator')
 const { mediaValidator } = require('../MediaValidator')
 const { ValidateUser } = require('../UserValidator')
+const bcrypt = require("bcrypt")
+const jwt = require('jsonwebtoken')
 
 
 // reading media data
@@ -139,3 +141,40 @@ exports.updateMedia = async (req, res) => {
         .then(media => res.json({ media, message: "Media Updated Succesfully" }))
         .catch(err => console.log(err))
 }
+
+
+// login validation
+exports.loginValidator = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        console.log(`email:${email} and password:${password}`)
+
+        const developer = await DevInfo.findOne({ email });
+        const user = await UserInfo.findOne({ email });
+
+        if (!developer && !user) {
+            return res.status(400).send("User not found");
+        }
+        const userData = developer || user;
+        const passwordMatches = await bcrypt.compare(password, userData.password);
+
+        console.log(passwordMatches)
+        if (passwordMatches) {
+            const token = await userData.generateAuthToken();
+            console.log(`token:${token}`)
+
+            // return res.cookie("jwt", token, {
+            //     // sameSite: 'None',
+            //     httpOnly: true,
+            //     // secure: true
+            // }).status(200).send("Logged in successfully!");
+            return res.status(200).send(token)
+            // return res.status(200).send("Logged in successfully!")
+        } else {
+            return res.status(400).send("Invalid login credentials");
+        }
+    } catch (error) {
+        console.error("Error during login validation:", error);
+        return res.status(500).send("Server Error");
+    }
+};

@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { backend_Uri } from '../config/constants';
 import { AnimatePresence } from 'framer-motion';
+import UploadForm from '../components/UploadForm';
+import Login from '../components/Login';
 
 
 
@@ -37,6 +39,11 @@ const AnimatedRoutes = () => {
                 <Routes location={location} key={location.pathname}>
                     <Route path="/users" element={<Users />} />
                     <Route path="/" element={<LandingPage />} />
+                    <Route
+                        path="/uploadMedias"
+                        element={<UploadForm getAllMedias={getAllMedias} />}
+                    />
+                    <Route path="/login" element={<Login />} />
                 </Routes>
             </AnimatePresence>
         </div>
