@@ -79,12 +79,12 @@ exports.devInfo = async (req, res) => {
     // password hashed
 
     try {
-        const insertInfo = await DevInfo.create({
-            name,
-            email,
-            projectname,
-            password
-        })
+
+        const developer = new DevInfo({ name, email, password, projectname })
+        const token = await developer.generateAuthToken();
+        res.cookie("jwt", token).json({ message: "Info added successfully", developer, token })
+
+        const userVerification = await jwt.verify(token, process.env.secret)
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Server Error' });
@@ -147,8 +147,6 @@ exports.updateMedia = async (req, res) => {
 exports.loginValidator = async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log(`email:${email} and password:${password}`)
-
         const developer = await DevInfo.findOne({ email });
         const user = await UserInfo.findOne({ email });
 
@@ -161,15 +159,7 @@ exports.loginValidator = async (req, res) => {
         console.log(passwordMatches)
         if (passwordMatches) {
             const token = await userData.generateAuthToken();
-            console.log(`token:${token}`)
-
-            // return res.cookie("jwt", token, {
-            //     // sameSite: 'None',
-            //     httpOnly: true,
-            //     // secure: true
-            // }).status(200).send("Logged in successfully!");
             return res.status(200).send(token)
-            // return res.status(200).send("Logged in successfully!")
         } else {
             return res.status(400).send("Invalid login credentials");
         }
