@@ -8,6 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 import UploadForm from '../components/UploadForm';
 import Login from '../components/Login';
 import PatentForm from '../components/PatentForm';
+import UploadsList from '../components/UploadsList';
 
 
 
@@ -44,7 +45,11 @@ const AnimatedRoutes = () => {
                         path="/uploadMedias"
                         element={<UploadForm getAllMedias={getAllMedias} />}
                     />
-                    <Route path="/patentForm" element={<PatentForm />} />   
+                    <Route
+                        path="/displayMedias/"
+                        element={<UploadsList medias={medias} />}
+                    />
+                    <Route path="/patentForm" element={<PatentForm />} />
                     <Route path="/login" element={<Login />} />
                 </Routes>
             </AnimatePresence>
