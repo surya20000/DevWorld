@@ -67,6 +67,24 @@ exports.create = async (req, res) => {
 };
 
 
+
+// Get all the data from the collections
+
+exports.getAllMediaWithDeveloperInfo = async (req, res) => {
+    try {
+        const mediaList = await Media.find();
+        const mediaWithDeveloperInfo = await Promise.all(mediaList.map(async (media) => {
+            const developer = await DevInfo.findOne({ email: media.email });
+            return { ...media.toObject(), developerInfo: developer };
+        }));
+        res.json(mediaWithDeveloperInfo);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+
+
 // creating developer Info 
 exports.devInfo = async (req, res) => {
     const { error, value } = ValidateDeveloper(req.body)
