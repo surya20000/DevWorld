@@ -9,6 +9,7 @@ import UploadForm from '../components/UploadForm';
 import Login from '../components/Login';
 import PatentForm from '../components/PatentForm';
 import UploadsList from '../components/UploadsList';
+import EditCapstone from './EditCapstone';
 
 
 
@@ -51,6 +52,7 @@ const AnimatedRoutes = () => {
                     />
                     <Route path="/patentForm" element={<PatentForm />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/editMedia/:id" element={<EditCapstone />} />
                 </Routes>
             </AnimatePresence>
         </div>

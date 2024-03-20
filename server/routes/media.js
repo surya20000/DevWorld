@@ -39,6 +39,9 @@ const router = express.Router();
 // get all Data
 router.get('/all', mediaController.getall)
 
+// get Media byId
+router.get('/getMedia/:id', mediaController.showById)
+
 // Another method
 
 router.get('/allWithDeveloperInfo', mediaController.getAllMediaWithDeveloperInfo);

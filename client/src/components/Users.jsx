@@ -15,11 +15,9 @@ const Users = () => {
     const [successMsg, setSuccessMsg] = useState("")
     const [errMsg, seterrMsg] = useState("")
     const navigate = useNavigate()
-    // const [motionOpen, setMotionOpen] = useState(false);
 
 
     const handleClose = () => {
-        // setMotionOpen(false); // Close the motion
         setSuccessMsg("");
         seterrMsg("")
     };
@@ -36,12 +34,11 @@ const Users = () => {
             .catch(error => {
                 console.log("Error", error)
                 if (error.response && error.response.data && error.response.data.error) {
-                    // Server returned validation error messages
                     seterrMsg(error.response.data.error.map(err => err.message).join(", "));
                 } else {
                     seterrMsg("Error adding info. Please try again.");
                 }
-                setSuccessMsg(""); // Clear any previous success messages
+                setSuccessMsg(""); 
             })
     }
 
