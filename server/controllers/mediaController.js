@@ -66,7 +66,46 @@ exports.create = async (req, res) => {
     }
 };
 
+// Show Media at the time of update by Id
 
+exports.showById =  (req, res) => {
+    const id =  req.params.id
+    Media.findById({ _id: id })
+        .then(media => res.json(media))
+        .catch(err => res.json({ "err": err }))
+}
+
+
+// Update the media data
+exports.updateMedia = async (req, res) => {
+    const id = req.params.id;
+    const { projectName, projectDescription, deployedLink, videos } = req.body;
+    
+    try {
+        const media = await Media.findById(id);
+        if (!media) {
+            return res.status(404).json({ message: "Media not found" });
+        }
+        const token = req.headers['authorization'];
+        if (!token) {
+            return res.status(401).json({ message: "Authorization token is missing" });
+        }
+        const userToken = token.split(' ')[1];
+        const verifyUser = jwt.verify(userToken, process.env.secret);
+        const user = await DevInfo.findOne({ _id: verifyUser._id });
+        if (!user || media.email !== user.email) {
+            return res.status(401).json({ message: "You are not the owner of the project!!" });
+        }
+        media.projectName = projectName;
+        media.projectDescription = projectDescription;
+        media.deployedLink = deployedLink;
+        await media.save();
+        res.json({ media, message: "Media updated successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
 
 // Get all the data from the collections
 

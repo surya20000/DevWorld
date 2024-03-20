@@ -22,19 +22,18 @@ const PatentForm = () => {
             .then(response => {
                 console.log("Info added Successfully", response.data, response.token);
                 setSuccessMessage("Info added Successfully");
-                setErrorMessage(""); // Clear any previous error messages
+                setErrorMessage(""); 
                 setTimeout(() => { navigate('/displayMedias'), console.log("You are being redirected") }, 1000)
 
             })
             .catch(error => {
                 console.error("Error", error);
                 if (error.response && error.response.data && error.response.data.error) {
-                    // Server returned validation error messages
                     setErrorMessage(error.response.data.error.map(err => err.message).join(", "));
                 } else {
                     setErrorMessage("Error adding info. Please try again.");
                 }
-                setSuccessMessage(""); // Clear any previous success messages
+                setSuccessMessage(""); 
             });
     }
 

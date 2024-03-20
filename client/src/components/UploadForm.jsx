@@ -37,12 +37,11 @@ const UploadForm = ({ getAllMedias }) => {
       .catch(error => {
         console.error("Error", error.message);
         if (error.response && error.response.data && error.response.data.error) {
-          // Server returned validation error messages
           setErrMessage(error.response.data.error.map(err => err.message).join(", "));
         } else {
           setErrMessage("Error adding info. Please try again.");
         }
-        setSuccessMessage(""); // Clear any previous success messages
+        setSuccessMessage(""); 
       });
 
   };
