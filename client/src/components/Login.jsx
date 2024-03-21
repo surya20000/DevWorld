@@ -5,19 +5,23 @@ import { useNavigate } from 'react-router-dom';
 import './PatentForm.Module.css';
 import { useAuth0 } from "@auth0/auth0-react";
 import { motion } from 'framer-motion';
-import Motion from './Motion'; 
+import Motion from './Motion';
+import styles from "./Login.module.css";
+import "./Button.css";
+import img1 from "../assets/o.png";
 
-const Login = () => {
+const Login = ({ onLogin }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [successMsg, setSuccessMsg] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const navigate = useNavigate();
     const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
+    const [logedIn, setLogedIn] = useState("")
     console.log(user);
 
     const handleClose = () => {
-        setSuccessMsg(""); 
+        setSuccessMsg("");
         setErrMsg("")
     };
 
@@ -34,8 +38,10 @@ const Login = () => {
                 localStorage.setItem('jwt', res.data)
                 console.log("Cookie", document.cookie);
                 setSuccessMsg("Logged In Successfully");
+                setLogedIn(true)
                 setErrMsg("");
                 setTimeout(() => navigate('/displayMedias'), 1000);
+                onLogin();
             })
             .catch(error => {
                 console.log("Err", error);
@@ -43,40 +49,63 @@ const Login = () => {
                 setSuccessMsg("");
             });
     };
-    
+
 
     return (
-        <div>
-            {
-                isAuthenticated ?
-                    <>
-                        {isAuthenticated && <h3> Hello {user.name} </h3>}
+        <div className={styles.container}>
+            <div className={styles.imageSection}>
+                <img src={img1} alt="Your Image" />
+            </div>
+            <div className={styles.formSection}>
+                {
+                    isAuthenticated || logedIn ?
                         <>
-                            <button onClick={logout}> Log Out </button>
+                            {navigate('/displayMedias')}
                         </>
-                    </>
+                        :
+                        <form className={styles.formcontainer}>
 
-                    :
+                            <span className={styles.heading}>Welcome back!</span>
+                            <p className={styles.text}>Please enter your login details</p>
+                            <div className={styles.formInput}>
+                                <input
+                                    type="email"
+                                    placeholder="Email"
+                                    id="email"
+                                    name="email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                                <input type="password" placeholder='Password' id='password' name="password" onChange={(e) => setPassword(e.target.value)} />
+                            </div>
+                            <div className={styles.formController}>
+                            </div>
+                            <button onClick={loginWithRedirect} className="login-with-google-btn">Sign in with Google</button>
+                            <motion.button onClick={handleSubmit} className="animated-button">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="arr-2"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                </svg>
+                                <span className="text">S U B M I T</span>
+                                <span className="circle"></span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="arr-1"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                                </svg>
+                            </motion.button>
+                            {successMsg === "Logged In Successfully" && <Motion text={successMsg} handleClose={handleClose} />}
+                            {errMsg === "No such user Exist!!" && <Motion text={errMsg} handleClose={handleClose} />}
+                            {errMsg === ""}
+                        </form>
+                }
+            </div>
 
-                    <form className='form-container'>
-                        <span className='heading'>Login</span>
-                        <label htmlFor="email">Email</label>
-                        <input type="email" placeholder='Email' id='email' name="email" onChange={(e) => setEmail(e.target.value)} />
-                        <label htmlFor="password">Password</label>
-                        <input type="password" placeholder='Password' id='password' name="password" onChange={(e) => setPassword(e.target.value)} />
-                        <div className='formController'>
-                        </div>
-                        <button onClick={loginWithRedirect}>Continue with Auth0</button>
-                        <motion.button
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                            onClick={handleSubmit}>Submit
-                        </motion.button>
-                        {successMsg === "Logged In Successfully" && <Motion text={successMsg} handleClose={handleClose} />} 
-                        {errMsg === "No such user Exist!!" && <Motion text={errMsg} handleClose={handleClose}/>}
-                    </form>
-            }
-        </div>
+        </div >
     );
 };
 

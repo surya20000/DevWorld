@@ -79,7 +79,7 @@ exports.showById =  (req, res) => {
 // Update the media data
 exports.updateMedia = async (req, res) => {
     const id = req.params.id;
-    const { projectName, projectDescription, deployedLink, videos } = req.body;
+    const { projectName, projectDescription, deployedLink } = req.body;
     
     try {
         const media = await Media.findById(id);
