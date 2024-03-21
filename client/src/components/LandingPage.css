@@ -84,3 +84,7 @@ footer p {
     font-size: 14px;
     color: #999;
 }
+
+.ib{
+    display: inline-block;
+}

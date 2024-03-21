@@ -48,7 +48,6 @@ label {
 }
 
 input[type="text"],
-input[type="email"],
 input[type="url"],
 input[type="file"] {
     width: 100%;
@@ -217,4 +216,18 @@ button[type="submit"]:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.contribution-statement {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+.contribution-number {
+    font-size: 2rem;
+    color: #ff5722;
+    margin: 0 5px;
 }
