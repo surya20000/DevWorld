@@ -22,39 +22,10 @@ const Navbar = () => {
 
 const App = () => {
 
-    const [motionOpen, setMotionOpen] = useState(false);
-
-    const toggleMotion = () => {
-        setMotionOpen(prevOpen => !prevOpen);
-    };
-
-    const handleClose = () => {
-        setMotionOpen(false); // Close the motion
-    };
-
     return (
         <>
             <Navbar />
             <AnimatedRoutes />
-            <div>
-                <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={toggleMotion}
-                >
-                    {motionOpen ? "Close Motion" : "Developer's Message"}
-                </motion.button>
-                <AnimatePresence
-                    initial={false}
-                    mode='wait'
-                    onExitComplete={() => null}
-                >
-                    {motionOpen && (
-                        <Motion text={"Thankyou for being the part of our community!!"} handleClose={handleClose} />
-                    )}
-                </AnimatePresence>
-            </div>
-
         </>
     );
 };
