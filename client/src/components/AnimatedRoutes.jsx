@@ -10,6 +10,7 @@ import Login from '../components/Login';
 import PatentForm from '../components/PatentForm';
 import UploadsList from '../components/UploadsList';
 import EditCapstone from './EditCapstone';
+import Developer from './Developer';
 
 
 
@@ -50,6 +51,7 @@ const AnimatedRoutes = () => {
                         path="/displayMedias/"
                         element={<UploadsList medias={medias} />}
                     />
+                    <Route path="/developer/:email" element={<Developer />} />
                     <Route path="/patentForm" element={<PatentForm />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/editMedia/:id" element={<EditCapstone />} />
