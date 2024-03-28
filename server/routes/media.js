@@ -46,6 +46,10 @@ router.get('/getMedia/:id', mediaController.showById)
 
 router.get('/allWithDeveloperInfo', mediaController.getAllMediaWithDeveloperInfo);
 
+//get Developer's info
+
+router.get('/getDeveloper/:emailId', mediaController.devInfoByEmail)
+
 //update Data
 router.put('/updateMedia/:id', mediaController.updateMedia)
 

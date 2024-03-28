@@ -199,6 +199,22 @@ exports.updateMedia = async (req, res) => {
         .catch(err => console.log(err))
 }
 
+// mediaController.js
+
+exports.devInfoByEmail = async (req, res) => {
+    const email = req.params.emailId;
+    try {
+        const developer = await DevInfo.findOne({ email });
+        if (!developer) {
+            return res.status(404).json({ message: "Developer not found" });
+        }
+        res.json(developer);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+}   
+
 
 // login validation
 exports.loginValidator = async (req, res) => {
