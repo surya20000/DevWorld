@@ -41,7 +41,7 @@ const UploadForm = ({ getAllMedias }) => {
         } else {
           setErrMessage("Error adding info. Please try again.");
         }
-        setSuccessMessage(""); 
+        setSuccessMessage("");
       });
 
   };
