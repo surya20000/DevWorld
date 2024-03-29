@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams, useNavigate } from 'react-router-dom'
 import { backend_Uri } from '../config/constants'
-import './EditCap.Module.css'
+import styles from './EditCap.module.css'
 import Motion from './Motion'
 
 const EditCapstone = () => {
@@ -16,7 +16,7 @@ const EditCapstone = () => {
 
 
     useEffect(() => {
-
+        console.log(`${backend_Uri}/media/getMedia/${id}`);
         axios.get(`${backend_Uri}/media/getMedia/${id}`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`
@@ -30,8 +30,9 @@ const EditCapstone = () => {
                 setDeployedLink(result.data.deployedLink)
             })
             .catch(error => {
-                console.log(error.message)
-                setErrMsg(error.message)
+                setErrMsg(error.response.data.message)
+                console.log("redirecting")
+                setTimeout(() => { navigate('/displayMedias'), console.log("redirecting") }, 1500)
             })
     }, [])
 
@@ -61,12 +62,12 @@ const EditCapstone = () => {
     };
 
     const handleClose = () => {
-        console.log("We are closed");
         setErrMsg("")
+        setMsg("")
     };
 
     return (
-        <div className="form-container">
+        <div className={styles.formcontainer}>
             <h2>Update Project</h2>
             <form className="update-form" onSubmit={update}>
                 <label htmlFor="projectName">Project Name:</label>

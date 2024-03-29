@@ -66,21 +66,35 @@ exports.create = async (req, res) => {
     }
 };
 
+
 // Show Media at the time of update by Id
 
-exports.showById =  (req, res) => {
-    const id =  req.params.id
+exports.showById = async (req, res) => {
+    const id = req.params.id;
+    console.log("hello");
     Media.findById({ _id: id })
-        .then(media => res.json(media))
-        .catch(err => res.json({ "err": err }))
+    const token = req.headers['authorization'];
+    if (!token) {
+        return res.status(401).json({ message: "Authorization token is missing" });
+    }
+    const userToken = token.split(' ')[1];
+    const verifyUser = jwt.verify(userToken, process.env.secret);
+    const user = await DevInfo.findOne({ _id: verifyUser._id });
+    const media = await Media.findById(id);
+    if (!user || media.email !== user.email) {
+        console.log("user not verified");
+        return res.status(401).json({ message: "You are not the owner of the project!!" });
+    }
+    console.log("show by ID");
+    res.json(media);
 }
 
 
 // Update the media data
 exports.updateMedia = async (req, res) => {
     const id = req.params.id;
-    const { projectName, projectDescription, deployedLink } = req.body;
-    
+    const { projectName, projectDescription, deployedLink, videos } = req.body;
+
     try {
         const media = await Media.findById(id);
         if (!media) {
@@ -106,7 +120,6 @@ exports.updateMedia = async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 };
-
 // Get all the data from the collections
 
 exports.getAllMediaWithDeveloperInfo = async (req, res) => {
@@ -174,31 +187,6 @@ exports.createUser = async (req, res) => {
     }
 }
 
-// Show Media at the time of update by Id
-
-exports.showById = async (req, res) => {
-    const id = req.params.id
-    // console.log(`JWT Cookie:${req.cookies.jwt}`)
-    Media.findById({ _id: id })
-        .then(media => res.json(media))
-        .catch(err => res.json({ "err": err }))
-}
-
-
-// Update the media data
-
-exports.updateMedia = async (req, res) => {
-    const id = req.params.id
-    Media.findByIdAndUpdate({ _id: id }, {
-        projectName: req.body.projectName,
-        projectDescription: req.body.projectDescription,
-        deployedLink: req.body.deployedLink,
-        videos: req.body.videos
-    })
-        .then(media => res.json({ media, message: "Media Updated Succesfully" }))
-        .catch(err => console.log(err))
-}
-
 // mediaController.js
 
 exports.devInfoByEmail = async (req, res) => {
@@ -213,13 +201,15 @@ exports.devInfoByEmail = async (req, res) => {
         console.log(error);
         res.status(500).json({ message: 'Server Error' });
     }
-}   
+}
 
 
 // login validation
 exports.loginValidator = async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log(`email:${email} and password:${password}`)
+
         const developer = await DevInfo.findOne({ email });
         const user = await UserInfo.findOne({ email });
 
@@ -232,6 +222,7 @@ exports.loginValidator = async (req, res) => {
         console.log(passwordMatches)
         if (passwordMatches) {
             const token = await userData.generateAuthToken();
+            console.log(`token:${token}`)
             return res.status(200).send(token)
         } else {
             return res.status(400).send("Invalid login credentials");
