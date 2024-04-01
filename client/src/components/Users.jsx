@@ -9,6 +9,7 @@ import Motion from './Motion';
 import img1 from '../assets/o.png';
 import styles from './Users.module.css';
 import "./Button.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Users = () => {
 
@@ -18,6 +19,7 @@ const Users = () => {
     const [successMsg, setSuccessMsg] = useState("")
     const [errMsg, seterrMsg] = useState("")
     const navigate = useNavigate()
+    const { user, loginWithPopup, loginWithRedirect, isAuthenticated, } = useAuth0();
 
 
     const handleClose = () => {
@@ -58,6 +60,7 @@ const Users = () => {
                         <input type="email" name='email' id='email' required placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
                         <input type="password" name='name' id='password' required placeholder='Password' className='form-input' onChange={(e) => setPassword(e.target.value)} />
                     </form>
+                    <button onClick={loginWithRedirect} className="login-with-google-btn">Sign in with Google</button>
                     <motion.button
                         onClick={handelSubmit}
                         className='animated-button' >    <svg

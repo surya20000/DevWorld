@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt = require("bcryptjs")
+const bcryptjs = require("bcryptjs")
 const jwt = require('jsonwebtoken')
 
 const DeveloperSchema = new mongoose.Schema({
@@ -20,7 +20,7 @@ const DeveloperSchema = new mongoose.Schema({
         trim: true
     },
     tokens: [{
-        token:  {
+        token: {
             type: String,
         }
     }],
@@ -30,19 +30,19 @@ const DeveloperSchema = new mongoose.Schema({
     }
 })
 
-DeveloperSchema.methods.generateAuthToken = async function(){
+DeveloperSchema.methods.generateAuthToken = async function () {
     const token = jwt.sign({ _id: this._id.toString() }, process.env.secret, { expiresIn: '10min' });
-    this.tokens = this.tokens.concat({ token }); 
+    this.tokens = this.tokens.concat({ token });
     await this.save();
     return token;
-} 
+}
 
 
-DeveloperSchema.pre("save", async function(next) {
+DeveloperSchema.pre("save", async function (next) {
     if (this.isModified("password")) {
         try {
             console.log(`Current password: ${this.password}`);
-            this.password = await bcrypt.hash(this.password, 10);
+            this.password = await bcryptjs.hash(this.password, 10);
             console.log(`Hashed password: ${this.password}`);
         } catch (error) {
             console.error("Error hashing password:", error);
