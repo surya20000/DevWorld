@@ -12,6 +12,13 @@ const UploadsList = ({ setSelected, item }) => {
   const count = useMotionValue(0);
   const rounded = useTransform(count, Math.round);
   const { user, getAccessTokenSilently } = useAuth0();
+  const [seachProject, setSearchProject] = useState("")
+  const [list, setList] = useState([])
+
+  useEffect(() => {
+    const res = mediaWithDeveloperInfo.filter(media => media.projectName === seachProject)
+    setList([...res])
+  }, [seachProject])
 
 
   const tokenByauth0 = async () => {
@@ -50,6 +57,9 @@ const UploadsList = ({ setSelected, item }) => {
     }
   };
 
+
+  const filterProjects = seachProject === "" ? mediaWithDeveloperInfo : mediaWithDeveloperInfo.filter(media => media.projectName === seachProject)
+
   return (
     <motion.div
       initial="hidden"
@@ -59,7 +69,24 @@ const UploadsList = ({ setSelected, item }) => {
       exit={{ opacity: 0 }}
       className="uploads-list-container"
     >
+      <div className="wrapper">
+        <input type="text" name="search" id="search" placeholder='Search project by name' onChange={(e) => setSearchProject(e.target.value)} />
+        <motion.div layout className="suggestions">
+          {seachProject && (
+            <>
+              {mediaWithDeveloperInfo.map((media) => (
+                media.projectName.includes(seachProject) && (
+                  <motion.div layout key={media.projectName} className="list">
+                    {media.projectName}
+                  </motion.div>
+                )
+              ))}
+            </>
+          )}
+        </motion.div>
 
+
+      </div>
       <p className='contribution-statement'>
         An honor to present
         <motion.span
@@ -92,7 +119,7 @@ const UploadsList = ({ setSelected, item }) => {
           y: -50
         }}
       >
-        {mediaWithDeveloperInfo.map(media => (
+        {filterProjects.map(media => (
           <div className="project-card" key={media._id}>
             <h3 className="project-name">{media.projectName}</h3>
             <div className='projDes'>
