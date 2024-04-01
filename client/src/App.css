@@ -1,77 +1,52 @@
 .navbar {
-    background-color: #333;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2vh;
-    font-size: 2.5vh;
-  }
-  
-  .navbar-link {
-    color: #fff;
-    text-decoration: none;
-    padding: 8px 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .navbar-link:hover {
-    background-color: #555;
-    border-radius: 5px;
-  }
-  
-  .navbar-links {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .navbar {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .navbar-links {
-      margin-top: 10px;
-    }
-  
-    .navbar-link {
-      display: block;
-      margin-right: 0;
-      margin-bottom: 5px;
-    }
-  }
-  
-  
-/* .backdrop{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: #000000e1;
+  background-color: #333;
+  padding: 10px 20px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  margin-bottom: 2vh;
+  font-size: 2.5vh;
 }
 
-.modal{
-  width: clamp(50%, 700px, 90%);
-  height: min(50%, 300px);
-  margin: auto;
-  padding: 0 2rem;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
+.navbar-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
 
-/* App.css */
+.navbar-link:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-links {
+    margin-top: 10px;
+  }
+
+  .navbar-link {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+}
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -104,4 +79,40 @@
   border-radius: 5px;
   z-index: 100;
   display: none;
+}
+
+
+.fixed {
+  position: fixed;
+  inset: 0;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 50;
+  cursor: pointer;
+  overflow-y: scroll;
+}
+
+.wid {
+  width: 400px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8px;
+  cursor: default;
+}
+
+.brows {
+  font-size: 2.5vh;
+  display: inline;
+  align-items: center;
+  padding: 1vh;
+  color: white;
+  background-color: #333;
+  margin-top: 8px;
+  border-radius: 10px;
+}
+
+.brows:hover {
+  background-color: #555;
+  border-radius: 5px;
 }

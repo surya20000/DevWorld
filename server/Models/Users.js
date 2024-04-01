@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt = require("bcryptjs")
+const bcryptjs = require("bcryptjs")
 const jwt = require('jsonwebtoken')
 
 const UserSchema = new mongoose.Schema({
@@ -33,7 +33,7 @@ UserSchema.pre("save", async function (next) {
     if (this.isModified("password")) {
         try {
             console.log(`Current password: ${this.password}`);
-            this.password = await bcrypt.hash(this.password, 10);
+            this.password = await bcryptjs.hash(this.password, 10);
             console.log(`Hashed password: ${this.password}`);
         } catch (error) {
             console.error("Error hashing password:", error);

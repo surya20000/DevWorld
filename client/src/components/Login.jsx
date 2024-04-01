@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { backend_Uri } from '../config/constants';
 import { useNavigate } from 'react-router-dom';
@@ -16,10 +16,10 @@ const Login = ({ onLogin }) => {
     const [successMsg, setSuccessMsg] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const navigate = useNavigate();
-    const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
+    const { user, loginWithPopup, loginWithRedirect, isAuthenticated, logout, getAccessTokenSilently } = useAuth0();
     const [logedIn, setLogedIn] = useState("")
+    const [signedInWithGoogle, setSignedInWithGoogle] = useState(false);
     console.log(user);
-
     const handleClose = () => {
         setSuccessMsg("");
         setErrMsg("")
@@ -32,6 +32,7 @@ const Login = ({ onLogin }) => {
                 'Authorization': `Bearer ${localStorage.getItem('jwt')}`
             }
         })
+
             .then(res => {
                 console.log("Response", res);
                 document.cookie = `jwt=${res.data}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
@@ -49,7 +50,6 @@ const Login = ({ onLogin }) => {
                 setSuccessMsg("");
             });
     };
-
 
     return (
         <div className={styles.container}>
@@ -79,7 +79,7 @@ const Login = ({ onLogin }) => {
                             </div>
                             <div className={styles.formController}>
                             </div>
-                            <button onClick={loginWithRedirect} className="login-with-google-btn">Sign in with Google</button>
+                            <button onClick={loginWithRedirect} className="login-with-google-btn">Login in with Google</button>
                             <motion.button onClick={handleSubmit} className="animated-button">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +100,6 @@ const Login = ({ onLogin }) => {
                             </motion.button>
                             {successMsg === "Logged In Successfully" && <Motion text={successMsg} handleClose={handleClose} />}
                             {errMsg === "No such user Exist!!" && <Motion text={errMsg} handleClose={handleClose} />}
-                            {errMsg === ""}
                         </form>
                 }
             </div>

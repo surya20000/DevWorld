@@ -49,7 +49,7 @@ router.put('/updateMedia/:id', auth, mediaController.updateMedia)
 
 //post data
 
-router.post('/create',  upload.fields([
+router.post('/create', upload.fields([
   {
     name: "videos"
   }
@@ -75,5 +75,6 @@ router.post('/login', mediaController.loginValidator)
 // enter user data
 
 router.post('/createUser', mediaController.createUser)
+
 
 module.exports = router
