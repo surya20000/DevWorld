@@ -17,3 +17,5 @@ Dev World is a website designed to provide a platform for developers to showcase
 - **Day 9:** Design my frontend Part of the project.
 - **Day 10:** Deploying my frontend Part of the project.
 - **Day 11:** Implementing the connections of my frontend to my backend.
+
+My low fidelity figma link ---- https://www.figma.com/file/ECOkaI8OCxU1JYIvG5v2DT/Untitled?type=design&node-id=0%3A1&mode=design&t=95THxAzmwcpKjPPk-1---

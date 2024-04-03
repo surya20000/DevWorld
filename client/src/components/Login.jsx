@@ -16,7 +16,7 @@ const Login = ({ onLogin }) => {
     const [successMsg, setSuccessMsg] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const navigate = useNavigate();
-    const { user, loginWithPopup, loginWithRedirect, isAuthenticated, logout, getAccessTokenSilently } = useAuth0();
+    const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
     const [logedIn, setLogedIn] = useState("")
     const [signedInWithGoogle, setSignedInWithGoogle] = useState(false);
     console.log(user);
