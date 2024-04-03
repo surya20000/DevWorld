@@ -84,8 +84,6 @@ const UploadsList = ({ setSelected, item }) => {
             </>
           )}
         </motion.div>
-
-
       </div>
       <p className='contribution-statement'>
         An honor to present

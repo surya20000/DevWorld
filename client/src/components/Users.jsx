@@ -19,7 +19,7 @@ const Users = () => {
     const [successMsg, setSuccessMsg] = useState("")
     const [errMsg, seterrMsg] = useState("")
     const navigate = useNavigate()
-    const { user, loginWithPopup, loginWithRedirect, isAuthenticated, } = useAuth0();
+    const { user,loginWithRedirect, isAuthenticated, } = useAuth0();
 
 
     const handleClose = () => {
