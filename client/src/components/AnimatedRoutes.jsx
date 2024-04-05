@@ -11,54 +11,48 @@ import PatentForm from '../components/PatentForm';
 import UploadsList from '../components/UploadsList';
 import EditCapstone from './EditCapstone';
 import Developer from './Developer';
-
-
+import PrivateRoute from './PrivateRoute'; // Corrected import path
 
 const AnimatedRoutes = () => {
+  const [medias, setMedias] = useState([]);
+  const location = useLocation();
 
-    const [medias, setMedias] = useState([]);
-    const location = useLocation()
+  useEffect(() => {
+    getAllMedias();
+  }, []);
 
+  const getAllMedias = () => {
+    axios
+      .get(`${backend_Uri}/media/all`)
+      .then((res) => {
+        setMedias(res.data);
+        console.log(medias);
+      })
+      .catch((err) => {
+        setMedias([]);
+        console.log('Error', err);
+      });
+  };
 
-    useEffect(() => {
-        getAllMedias();
-    }, []);
+  return (
+    <div>
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/users" element={<Users />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/uploadMedias"
+            element={<PrivateRoute Component={UploadForm} />}
+          />
+          <Route path="/displayMedias" element={<PrivateRoute Component={UploadsList}  />} />
+          <Route path="/developer/:email" element={<Developer />} />
+          <Route path="/patentForm" element={<PatentForm />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/editMedia/:id" element={<EditCapstone />} />
+        </Routes>
+      </AnimatePresence>
+    </div>
+  );
+};
 
-    const getAllMedias = () => {
-        axios
-            .get(`${backend_Uri}/media/all`)
-            .then((res) => {
-                setMedias(res.data);
-                console.log(medias);
-            })
-            .catch((err) => {
-                setMedias([]);
-                console.log('Error', err);
-            });
-    };
-
-    return (
-        <div>
-            <AnimatePresence>
-                <Routes location={location} key={location.pathname}>
-                    <Route path="/users" element={<Users />} />
-                    <Route path="/" element={<LandingPage />} />
-                    <Route
-                        path="/uploadMedias"
-                        element={<UploadForm getAllMedias={getAllMedias} />}
-                    />
-                    <Route
-                        path="/displayMedias/"
-                        element={<UploadsList medias={medias} />}
-                    />
-                    <Route path="/developer/:email" element={<Developer />} />
-                    <Route path="/patentForm" element={<PatentForm />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/editMedia/:id" element={<EditCapstone />} />
-                </Routes>
-            </AnimatePresence>
-        </div>
-    )
-}
-
-export default AnimatedRoutes
+export default AnimatedRoutes;

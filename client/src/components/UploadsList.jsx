@@ -150,7 +150,10 @@ const UploadsList = ({ setSelected, item }) => {
         ))}
       </motion.div>
       <motion.button
-        onClick={logout}
+        onClick={() => {
+          logout();
+          localStorage.setItem('logedIn', false);
+        }}
         className='logoutbtn'
         whileTap={{ scale: 0.85 }}
       >
