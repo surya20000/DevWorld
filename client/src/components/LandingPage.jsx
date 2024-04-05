@@ -1,6 +1,7 @@
 import '../components/LandingPage.css';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import TextAnimation from './TextAnimation';
 
 const LandingPage = () => {
 
@@ -9,19 +10,52 @@ const LandingPage = () => {
         visible: { opacity: 1 },
     };
 
+    const defaultAnimations = {
+        hidden: {
+            opacity: 0,
+        },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.3
+            }
+        }
+    }
+
+    const text = "Welcome to DevWorld!!"
+
     return (
         <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeIn}
-            // transition={{ duration: 2 }}
             exit={{ opacity: 0 }}
             className="landing-page-container"
         >
             <header>
-                <h1>Welcome to DevWorld</h1>
-                <p>A free platform for developers to showcase their capstone and full-stack web applications.</p>
-            </header>
+                <motion.span
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ staggerChildren: 0.02 }}
+                    aria-hidden
+                >
+                    {text.split(" ").map((word) => (
+                        <span key={word} className="ib">
+                            {word.split("").map((char, index) => (
+                                <motion.span
+                                    className="ib"
+                                    variants={defaultAnimations}
+                                    key={index}
+                                >
+                                    <h1> {char} </h1>
+                                </motion.span>
+                            ))}
+                            &nbsp;
+                        </span>
+                    ))}
+                </motion.span>
+                {<TextAnimation/>}
+            </header >
             <main>
                 <section className="features">
                     <div className="feature">
@@ -48,7 +82,7 @@ const LandingPage = () => {
             <footer>
                 <p>&copy; 2024 DevWorld. All rights reserved.</p>
             </footer>
-        </motion.div>
+        </motion.div >
     );
 };
 
