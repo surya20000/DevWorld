@@ -36,9 +36,11 @@ const Login = () => {
             )
             .then((res) => {
                 console.log("Response", res);
-                document.cookie = `jwt=${res.data}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
-                localStorage.setItem("jwt", res.data);
-                localStorage.setItem("loggedIn", true); 
+                console.log("email:", res.data.userData.email);
+                localStorage.setItem("email", res.data.userData.email)
+                document.cookie = `jwt=${res.data.token}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+                localStorage.setItem("jwt", res.data.token);
+                localStorage.setItem("logedIn", true); 
                 console.log("Cookie", document.cookie);
                 setSuccessMsg("Logged In Successfully");
                 setErrMsg("");

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from 'react-router-dom';
 
 const UploadsList = ({ setSelected, item }) => {
   const [mediaWithDeveloperInfo, setMediaWithDeveloperInfo] = useState([]);
@@ -12,12 +13,18 @@ const UploadsList = ({ setSelected, item }) => {
   const count = useMotionValue(0);
   const rounded = useTransform(count, Math.round);
   const { user, getAccessTokenSilently } = useAuth0();
-  const [seachProject, setSearchProject] = useState("")
-  const [list, setList] = useState([])
+  const [seachProject, setSearchProject] = useState("");
+  const [list, setList] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const res = mediaWithDeveloperInfo.filter(media => media.projectName === seachProject)
     setList([...res])
+    // const locallog = localStorage.getItem("logedIn")
+    // console.log(locallog);
+    // if(locallog === false){
+    //   navigate('/login')
+    // }
   }, [seachProject])
 
 
@@ -42,6 +49,11 @@ const UploadsList = ({ setSelected, item }) => {
     if (location.state && location.state.signedInWithGoogle) {
       googleSignIn();
     }
+    const locallog = localStorage.getItem("logedIn")
+    console.log(locallog);
+    if (locallog === "false") {
+      navigate('/login')
+    }
   }, []);
 
 
@@ -65,7 +77,6 @@ const UploadsList = ({ setSelected, item }) => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-
       exit={{ opacity: 0 }}
       className="uploads-list-container"
     >
@@ -153,6 +164,7 @@ const UploadsList = ({ setSelected, item }) => {
         onClick={() => {
           logout();
           localStorage.setItem('logedIn', false);
+          localStorage.setItem('signedIn', false)
         }}
         className='logoutbtn'
         whileTap={{ scale: 0.85 }}
@@ -164,4 +176,3 @@ const UploadsList = ({ setSelected, item }) => {
 };
 
 export default UploadsList;
-

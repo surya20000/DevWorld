@@ -76,5 +76,8 @@ router.post('/login', mediaController.loginValidator)
 
 router.post('/createUser', mediaController.createUser)
 
+// check for the develoer
+
+router.get('/developer/:email', mediaController.isDeveloper)
 
 module.exports = router

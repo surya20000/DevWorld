@@ -42,27 +42,34 @@ exports.create = async (req, res) => {
     const { email, projectName, projectDescription, deployedLink } = req.body;
     let videosPaths = [];
 
+    const isDeveloper = await DevInfo.findOne({ email })
+    console.log("found the developer", isDeveloper);
     // Process uploaded videos
-    if (req.files && req.files.videos && Array.isArray(req.files.videos) && req.files.videos.length > 0) {
-        for (let video of req.files.videos) {
-            videosPaths.push('/' + video.path);
-        }
+    if (isDeveloper === null) {
+        res.json({ message: "You are not a developer" })
     }
+    else {
+        if (req.files && req.files.videos && Array.isArray(req.files.videos) && req.files.videos.length > 0) {
+            for (let video of req.files.videos) {
+                videosPaths.push('/' + video.path);
+            }
+        }
 
-    try {
-        // Create media with developer's email
-        const createdMedia = await Media.create({
-            email,
-            projectName,
-            projectDescription,
-            deployedLink,
-            videos: videosPaths,
-        });
+        try {
+            // Create media with developer's email
+            const createdMedia = await Media.create({
+                email,
+                projectName,
+                projectDescription,
+                deployedLink,
+                videos: videosPaths,
+            });
 
-        res.json({ message: "Media added successfully", createdMedia });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Server Error' });
+            res.json({ message: "Media added successfully", createdMedia });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server Error' });
+        }
     }
 };
 
@@ -222,8 +229,8 @@ exports.loginValidator = async (req, res) => {
         console.log(passwordMatches)
         if (passwordMatches) {
             const token = await userData.generateAuthToken();
-            console.log(`token:${token}`)
-            return res.status(200).send(token)
+            // console.log(`token:${token}`)
+            return res.status(200).send({ token, userData })
         } else {
             return res.status(400).send("Invalid login credentials");
         }
@@ -232,3 +239,24 @@ exports.loginValidator = async (req, res) => {
         return res.status(500).send("Server Error");
     }
 };
+
+//
+
+exports.isDeveloper = async (req, res) => {
+    console.log("Route visited");
+    try {
+        const { email } = req.params
+        console.log(email);
+        const foundDevloper = await DevInfo.findOne({ email })
+        if (foundDevloper === null) {
+            res.send({ data: false })
+            console.log(false);
+        }
+        else {
+            res.send({ data: true })
+            console.log(true);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

@@ -32,7 +32,9 @@ const Users = () => {
         axios.post(`${backend_Uri}/media/createUser`, { name, email, password })
             .then(res => {
                 console.log("Response", res.data)
+                localStorage.setItem("email", res.userInfo.email)
                 setSuccessMsg("User Created Successfully")
+                localStorage.setItem("signedIn",true)
                 seterrMsg("")
                 setTimeout(() => navigate('/displayMedias'), 1000)
             })
