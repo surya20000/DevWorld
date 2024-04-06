@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { backend_Uri } from '../config/constants';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../components/Components.css'
 import './PatentForm.Module.css'
 import Motion from './Motion';
@@ -14,6 +14,7 @@ const UploadForm = ({ getAllMedias }) => {
   const [videos, setVideos] = useState([]);
   const [successMsg, setSuccessMessage] = useState("")
   const [errMsg, setErrMessage] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +31,6 @@ const UploadForm = ({ getAllMedias }) => {
     console.log(formData);
     axios.post(`${backend_Uri}/media/create`, formData)
       .then(success => {
-        getAllMedias();
         console.log('Video Added successfully', success.message);
         setSuccessMessage("Data Added Successfully,Get a Patent for yourself")
       })
@@ -50,6 +50,25 @@ const UploadForm = ({ getAllMedias }) => {
     setSuccessMessage("");
     setErrMessage("")
   };
+
+  useEffect(() => {
+    const locallog = localStorage.getItem("logedIn")
+    console.log(locallog);
+    if (locallog === "false") {
+      navigate('/login')
+    }
+    axios.get(`${backend_Uri}/media/developer/${localStorage.getItem("email")}`)
+      .then((res) => {
+        console.log(("value" ,res.data.data));
+        if(res.data.data === false){
+          navigate('/')
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+  }, [])
 
 
   return (

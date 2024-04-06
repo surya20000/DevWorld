@@ -42,9 +42,9 @@ const AnimatedRoutes = () => {
           <Route path="/" element={<LandingPage />} />
           <Route
             path="/uploadMedias"
-            element={<PrivateRoute Component={UploadForm} />}
+            element={<UploadForm/>}
           />
-          <Route path="/displayMedias" element={<PrivateRoute Component={UploadsList}  />} />
+          <Route path="/displayMedias" element={<UploadsList/>} />
           <Route path="/developer/:email" element={<Developer />} />
           <Route path="/patentForm" element={<PatentForm />} />
           <Route path="/login" element={<Login />} />

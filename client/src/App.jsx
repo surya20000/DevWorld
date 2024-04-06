@@ -29,14 +29,22 @@ const Navbar = () => {
     window.location.reload()
   }
 
+  const handelUploadProjects = () =>{
+    if (isAuthenticated){
+      navigate('/uploadMedias')
+    }else{
+      setLoginMsg("Please Login to continue")
+    }
+  }
+
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-link">DevWorld</Link>
       <div className="navbar-links">
         <div className="navbar-link" onClick={LoginBtn}>Login</div>
         <Link to="/users" className="navbar-link">New User</Link>
-        <Link to="/uploadMedias" className="navbar-link">Upload Projects</Link>
-        <button onClick={handleBrowseProjects} className="brows">Browse Projects</button>
+        <Link to="/uploadMedias" className="navbar-link"> Upload Projects </Link>
+        <Link to="/displayMedias" className='navbar-link' > Browse Projects </Link>
       </div>
       {loginMsg && <Motion text={loginMsg} handleClose={handleClose} />}
     </nav>
@@ -67,15 +75,6 @@ const App = () => {
       <Navbar onLogin={handleLogin} />
       <AnimatedRoutes />
       <div>
-        {/* <AnimatePresence
-          initial={false}
-          mode='wait'
-          onExitComplete={() => null}
-        >
-          {motionOpen && (
-            <Motion text={"Thankyou for being the part of our community!!"} handleClose={handleClose} />
-          )}
-        </AnimatePresence> */}
       </div>
     </>
   );
