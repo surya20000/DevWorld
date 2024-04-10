@@ -97,7 +97,11 @@ const Login = () => {
                         <button
                             type="button"
                             className="login-with-google-btn"
-                            onClick={loginWithRedirect}
+                            onClick={loginWithRedirect({
+                                appState:{
+                                    returnTo: window.location.origin+ "displayMedias"
+                                }
+                            })}
                         >
                             Sign in with Google
                         </button>
