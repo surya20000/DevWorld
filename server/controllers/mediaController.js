@@ -115,7 +115,7 @@ exports.updateMedia = async (req, res) => {
         const verifyUser = jwt.verify(userToken, process.env.secret);
         const user = await DevInfo.findOne({ _id: verifyUser._id });
         if (!user || media.email !== user.email) {
-            return res.status(401).json({ message: "You are not the owner of the project!!" });
+            return res.status(403).json({ message: "You are not the owner of the project!!" });
         }
         media.projectName = projectName;
         media.projectDescription = projectDescription;

@@ -1,1 +1,1 @@
-export const backend_Uri = 'http://localhost:5000'
+export const backend_Uri = 'https://devworld-2.onrender.com'

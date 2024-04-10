@@ -11,8 +11,6 @@ import PatentForm from '../components/PatentForm';
 import UploadsList from '../components/UploadsList';
 import EditCapstone from './EditCapstone';
 import Developer from './Developer';
-import PrivateRoute from './PrivateRoute'; // Corrected import path
-
 const AnimatedRoutes = () => {
   const [medias, setMedias] = useState([]);
   const location = useLocation();
