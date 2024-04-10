@@ -2,9 +2,9 @@ import '../components/LandingPage.css';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import TextAnimation from './TextAnimation';
-
+import {useNavigate} from 'react-router-dom'
 const LandingPage = () => {
-
+    const navigate = useNavigate()
     const fadeIn = {
         hidden: { opacity: 0 },
         visible: { opacity: 1 },
@@ -74,7 +74,7 @@ const LandingPage = () => {
                 <section className="cta">
                     <h2>Ready to Join?</h2>
                     <div className="cta-buttons">
-                        <Link to="/login" className="login-btn"> Login</Link>
+                        <button onClick={()=>navigate('/login')} className="login-btn"> Login</button>
                         <Link to="/users" className="signup-btn">Sign Up</Link>
                     </div>
                 </section>

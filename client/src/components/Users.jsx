@@ -62,7 +62,7 @@ const Users = () => {
                         <input type="email" name='email' id='email' required placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
                         <input type="password" name='name' id='password' required placeholder='Password' className='form-input' onChange={(e) => setPassword(e.target.value)} />
                     </form>
-                    <button onClick={loginWithRedirect} className="login-with-google-btn">Sign in with Google</button>
+                    <button onClick={()=>loginWithRedirect()} className="login-with-google-btn">Sign in with Google</button>
                     <motion.button
                         onClick={handelSubmit}
                         className='animated-button' >    <svg
