@@ -26,7 +26,7 @@ const Navbar = () => {
 
   const LoginBtn=()=>{
     navigate('/login')
-    window.location.reload()
+    // window.location.reload()
   }
 
   const handelUploadProjects = () =>{
