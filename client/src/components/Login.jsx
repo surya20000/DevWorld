@@ -22,6 +22,13 @@ const Login = () => {
         setErrMsg("");
     };
 
+    useEffect(() =>{
+        const isLogedIn = localStorage.getItem("logedIn")
+        if(isLogedIn === "true"){
+            navigate('/')
+        }
+    })
+
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
