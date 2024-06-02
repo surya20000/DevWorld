@@ -9,7 +9,6 @@ import { motion } from 'framer-motion';
 const Developer = () => {
     const { email } = useParams()
     const [developerInfo, setDeveloperInfo] = useState(null);
-    console.log(email)
     useEffect(() => {
         const fetchDeveloperInfo = async () => {
             try {

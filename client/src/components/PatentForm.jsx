@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { backend_Uri } from '../config/constants';
-import './PatentForm.Module.css';
+import styles from "../components/PatentForm.module.css";
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Motion from './Motion';
+import img1 from "../assets/2.png";
 
 const PatentForm = () => {
     const [name, setName] = useState("");
@@ -43,36 +44,41 @@ const PatentForm = () => {
     }
 
     return (
-        <div className="form-container">
-            <form onSubmit={handleInfo}>
-                <p className='formH'> Sign up for Patent </p>
-                <div className="form-group">
+        <div className={styles.container}>
+                <div className={styles.imageSection}>
+                      <img src={img1} alt="image" className={styles.image} />
+                </div>
+                <div className={styles.formcontainer}>
+                <form onSubmit={handleInfo}>
+                <p className={styles.heading}> Sign up for Patent </p>
+                <div className={styles.formInput}>
                     <label className="form-label" htmlFor="name">Enter Name</label>
                     <input type="text" name="name" id="name" className="form-input" value={name} onChange={(e) => setName(e.target.value)} required />
                 </div>
-                <div className="form-group">
+                <div className={styles.formInput}>
                     <label className="form-label" htmlFor="email">Enter Email</label>
                     <input type="email" name="email" id="email" className="form-input" value={email} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
-                <div className="form-group">
+                <div className={styles.formInput}>
                     <label className="form-label" htmlFor="password">Enter Password</label>
                     <input type="password" name="password" id="password" className="form-input" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
-                <div className="form-group">
-                    <label className="form-label" htmlFor="text">Projectname</label>
-                    <input type="text" name="text" id="text" className="form-input" value={projectname} onChange={(e) => setProjectName(e.target.value)} placeholder="Eg: B-tech 1st year" required />
+                <div className={styles.formInput}>
+                    <label className="form-label" htmlFor="text">Project Name</label>
+                    <input type="text" name="text" id="text" className="form-input" value={projectname} onChange={(e) => setProjectName(e.target.value)}  required />
                 </div>
                 <motion.button
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.9 }}
-                    type="submit"
-                    className="form-button"
+
+                    className={styles.formButton}
                 >
                     Submit
                 </motion.button>
             </form>
             {successMessage && <Motion text={successMessage} handleClose={handleClose} />}
             {errorMessage && <Motion text={errorMessage} handleClose={handleClose} />}
+                </div>
         </div>
     );
 };

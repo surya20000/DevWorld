@@ -1,13 +1,29 @@
+.landing-text-container {
+    position: absolute;
+    top: 38%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: white;
+    width: 80%;
+}
+
+.phrases {
+    font-size: 22px;
+    color: white;
+}
+
 .landing-page-container {
-    max-width: 1200px;
+
+    max-width: 800px;
     margin: 0 auto;
     padding: 50px 20px;
     text-align: center;
+
 }
 
 header h1 {
     font-size: 36px;
-    margin-bottom: 20px;
 }
 
 header p {
@@ -88,3 +104,123 @@ footer p {
 .ib{
     display: inline-block;
 }
+
+
+.landingImage img{
+    display: flex;
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+}
+
+.get-started-btn {
+    position: absolute;
+    top: 85%;
+    left: 15%;
+    margin-top: 10px;
+    margin-left: 90px;
+    
+    transform: translate(-50%, -50%);
+    align-items: center;
+    transition: background-color 0.3s ease;
+    width: 350px;
+    padding: 16px 36px;
+    border: 2px solid;
+    border-color:transparent;
+    font-size: 20px;
+    background-color:rgba(84, 122, 247, 0.815);
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 0 0 2px #ffffff;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+
+
+.get-started-btn:hover {
+    background-color: #0056b3;
+}
+
+.landing-page-image {
+    width: 100%;
+    height: auto;
+    size: 100% 100%;
+    transform: translateY(-14.9px);
+}
+
+.get-started-btn svg {
+    position: absolute;
+    width: 24px;
+    fill: white;
+    z-index: 9;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.get-started-btn .arr-1 {
+    right: 70px;
+    bottom: 18px;
+  }
+  
+  .get-started-btn .arr-2 {
+    left: -25%;
+    bottom: 18px;
+  }
+  
+  .get-started-btn .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background-color:rgb(54, 77, 154);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .get-started-btn .text {
+    position: relative;
+    margin-left: 5px;
+    z-index: 1;
+    transform: translateX(-12px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .get-started-btn:hover {
+    box-shadow: 0 0 0 12px transparent;
+    color:white;
+    border-radius: 12px;
+  }
+  
+  .get-started-btn:hover .arr-1 {
+    right: -25%;
+  }
+  
+  .get-started-btn:hover .arr-2 {
+    left: 20px;
+  }
+  
+  .get-started-btn:hover .text {
+    transform: translateX(12px);
+    margin-left: 80px;
+    transition: all 0.5s ease-out;
+}
+  
+  .get-started-btn:hover svg {
+    fill:white;
+    margin-left: 80px;
+    transition: all 0.5s ease-out;
+  }
+  
+  .get-started-btn:active {
+    scale: 0.95;
+    box-shadow: 0 0 0 4px grey;
+  }
+  
+  .get-started-btn .circle {
+    width: 400px;
+    height: 400px;
+    opacity: 1;
+  }

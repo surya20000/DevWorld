@@ -1,175 +1,172 @@
-*{
-    margin:0;
-    padding: 0;
-  }
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60vh; 
-  }
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh; 
   
-  .imageSection {
-    flex: 1;
-  
-  }
-  .imageSection img {
-    height: 100%;
-    margin-left:10%;
-    margin-top: 3%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-  
-  .formSection {
-    flex: 1;
-    padding: 20px;
-  }
-  
-  .formInput{
-    margin-top: 40px;
-  }
-  
-  .formcontainer {
-    height: 400px;
-    max-width: 400px;
-    margin-top: 20%;
-    margin-left: 5%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.331);
-    backdrop-filter: blur(10px); 
-  }
-  
-  .heading {
-    display: block;
-    font-size: 24px;
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 1px;
-    color: rgb(84,121,247);
-  }
-  
-  .text{
-    text-align: center;
-    color: #716f6f;
-  }
-  
-  
-  .users{
-    text-align: center;
-    color: #716f6f;
-    margin-top: 10px;
-  }
-  
-  .users a{
-    color: rgb(84,121,247);
-    transition: border-bottom 0.3s ease;
-  }
-  
-  .users a::after {
-    content: "";
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    width: 0; 
-    height: 2px; 
-    background-color: rgb(54, 77, 154); 
-    transition: width 0.5s ease; 
-  }
-  .users a:hover::after {
-    width: 100%; 
-  }
-  
-  .users a:hover{
-    color:rgb(54, 77, 154);
-  }
-  
-  
-  input[type="email"]{
-    width: 350px;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-size: 15px;
-    margin-left: 25px;
-    border: none;
-    background-color: transparent;
-    border-bottom: 2px solid rgb(84,121,247);
-    outline: none;
-  }
-  
-  input[type="password"] {
-    width: 350px;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    font-size: 15px;
-    margin-left: 25px;
-    border: none;
-    background-color: transparent;
-    border-bottom: 2px solid rgb(84,121,247);
-    outline: none; 
-  }
-  input[type="text"]{
-    width: 350px;
-    padding: 10px;
-    border-radius: 5px;
-    width:330px;
-    margin-bottom: 15px;
-    font-size: 15px;
-    margin-left: 25px;
-    border: none;
-    background-color: transparent;
-    border-bottom: 2px solid rgb(84,121,247);
-    outline: none; 
-  }
-  
-  input[type="email"]::placeholder,
-  input[type="password"]::placeholder {
-    color: rgb(84,121,247); 
-  }
-  
-  input[type="email"]:focus,
-  input[type="password"]:focus {
-    border-bottom: 3px solid rgb(84,121,247); 
-  }
-  
-  
-  .formController {
-    margin-bottom: 15px;
-  }
-  .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    z-index: 9999;
-    text-align: center;
-    max-width: 400px;
-  }
-  
-  .popup-close {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    color: white;
-  }
-  
-  .popup-success {
-    background-color: #32cd32bd; 
-    border: 2px solid #039603bd;
-  }
-  
-  .popup-error {
-    background-color: #ff7575de;
-    border: 2px solid #d40303;
-  }
+}
+
+.imageSection {
+  flex: 1;
+
+}
+.imageSection img {
+  height: 100%;
+  margin-left:10%;
+  margin-top: 3%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.formSection {
+  flex: 1;
+  padding: 20px;
+}
+
+.formInput{
+  margin-top: 40px;
+}
+
+.formcontainer {
+  height: 400px;
+  max-width: 450px;
+  margin-top: 20%;
+  margin-left: 5%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.331);
+  backdrop-filter: blur(10px); 
+}
+
+.heading {
+  display: block;
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1px;
+  color: rgb(84,121,247);
+}
+
+.text{
+  text-align: center;
+  color: #716f6f;
+}
+
+
+.users{
+  text-align: center;
+  color: #716f6f;
+  margin-top: 10px;
+}
+
+.users a{
+  color: rgb(84,121,247);
+  transition: border-bottom 0.3s ease;
+}
+
+.users a::after {
+  content: "";
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  width: 0; 
+  height: 2px; 
+  background-color: rgb(54, 77, 154); 
+  transition: width 0.5s ease; 
+}
+.users a:hover::after {
+  width: 100%; 
+}
+
+.users a:hover{
+  color:rgb(54, 77, 154);
+}
+
+
+input[type="email"]{
+  width: 350px;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  margin-left: 25px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid rgb(84,121,247);
+  outline: none;
+}
+
+input[type="password"] {
+  width: 350px;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  margin-left: 25px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid rgb(84,121,247);
+  outline: none; 
+}
+input[type="text"]{
+  width: 350px;
+  padding: 10px;
+  border-radius: 5px;
+  width:330px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  margin-left: 25px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid rgb(84,121,247);
+  outline: none; 
+}
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+  color: rgb(84,121,247); 
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-bottom: 3px solid rgb(84,121,247); 
+}
+
+
+.formController {
+  margin-bottom: 15px;
+}
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 9999;
+  text-align: center;
+  max-width: 400px;
+}
+
+.popup-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.popup-success {
+  background-color: #32cd32bd; 
+  border: 2px solid #039603bd;
+}
+
+.popup-error {
+  background-color: #ff7575de;
+  border: 2px solid #d40303;
+}
