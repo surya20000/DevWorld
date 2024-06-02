@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { backend_Uri } from '../config/constants';
-import styles from "./PatentForm.Module.css";
+import * as styles from "./PatentForm.Module.css";
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Motion from './Motion';
