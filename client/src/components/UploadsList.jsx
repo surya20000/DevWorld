@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { backend_Uri } from '../config/constants';
-import '../components/Components.css';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { useState, useEffect } from "react";
+import { backend_Uri } from "../config/constants";
+import "../components/Components.css";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const UploadsList = ({ setSelected, item }) => {
   const [mediaWithDeveloperInfo, setMediaWithDeveloperInfo] = useState([]);
@@ -15,33 +15,33 @@ const UploadsList = ({ setSelected, item }) => {
   const { user, getAccessTokenSilently } = useAuth0();
   const [seachProject, setSearchProject] = useState("");
   const [list, setList] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const res = mediaWithDeveloperInfo.filter(media => media.projectName === seachProject)
-    setList([...res])
-    // const locallog = localStorage.getItem("logedIn")
-    // console.log(locallog);
-    // if(locallog === false){
-    //   navigate('/login')
-    // }
-  }, [seachProject])
-
+    const res = mediaWithDeveloperInfo.filter(
+      (media) => media.projectName === seachProject
+    );
+    setList([...res]);
+  }, [seachProject, mediaWithDeveloperInfo]);
 
   const tokenByauth0 = async () => {
-    const token = await getAccessTokenSilently()
+    const token = await getAccessTokenSilently();
     console.log("token by OAuth0", token);
     console.log(user);
-    localStorage.setItem('jwt', token)
-  }
+    localStorage.setItem("jwt", token);
+  };
 
   const googleSignIn = () => {
-    axios.post(`${backend_Uri}/media/signInByGoogle`, { name: user.name, email: user.email })
-      .then(res => {
-        console.log("Response", res.data)
+    axios
+      .post(`${backend_Uri}/media/signInByGoogle`, {
+        name: user.name,
+        email: user.email,
       })
-      .catch(error => console.log(error))
-  }
+      .then((res) => {
+        console.log("Response", res.data);
+      })
+      .catch((error) => console.log(error));
+  };
 
   useEffect(() => {
     getAllMediaWithDeveloperInfo();
@@ -49,28 +49,32 @@ const UploadsList = ({ setSelected, item }) => {
     if (location.state && location.state.signedInWithGoogle) {
       googleSignIn();
     }
-    const locallog = localStorage.getItem("logedIn")
+    const locallog = localStorage.getItem("logedIn");
     console.log(locallog);
     if (locallog === "false") {
-      navigate('/login')
+      navigate("/login");
     }
   }, []);
 
-
   const getAllMediaWithDeveloperInfo = async () => {
     try {
-      const response = await axios.get(`${backend_Uri}/media/allWithDeveloperInfo`);
+      const response = await axios.get(
+        `${backend_Uri}/media/allWithDeveloperInfo`
+      );
       setMediaWithDeveloperInfo(response.data);
-      console.log(response.data);
       const animation = animate(count, response.data.length, { duration: 1 });
       return animation.stop;
     } catch (error) {
-      console.error('Error fetching media with developer info:', error);
+      console.error("Error fetching media with developer info:", error);
     }
   };
 
-
-  const filterProjects = seachProject === "" ? mediaWithDeveloperInfo : mediaWithDeveloperInfo.filter(media => media.projectName === seachProject)
+  const filterProjects =
+    seachProject === ""
+      ? mediaWithDeveloperInfo
+      : mediaWithDeveloperInfo.filter(
+          (media) => media.projectName === seachProject
+        );
 
   return (
     <motion.div
@@ -81,25 +85,32 @@ const UploadsList = ({ setSelected, item }) => {
       className="uploads-list-container"
     >
       <div className="wrapper">
-        <input type="text" name="search" id="search" placeholder='Search project by name' onChange={(e) => setSearchProject(e.target.value)} />
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Search project by name"
+          onChange={(e) => setSearchProject(e.target.value)}
+        />
         <motion.div layout className="suggestions">
           {seachProject && (
             <>
-              {mediaWithDeveloperInfo.map((media) => (
-                media.projectName.includes(seachProject) && (
-                  <motion.div layout key={media.projectName} className="list">
-                    {media.projectName}
-                  </motion.div>
-                )
-              ))}
+              {mediaWithDeveloperInfo.map(
+                (media) =>
+                  media.projectName.includes(seachProject) && (
+                    <motion.div layout key={media.projectName} className="list">
+                      {media.projectName}
+                    </motion.div>
+                  )
+              )}
             </>
           )}
         </motion.div>
       </div>
-      <p className='contribution-statement'>
+      <p className="contribution-statement">
         An honor to present
         <motion.span
-          className='contribution-number'
+          className="contribution-number"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -112,46 +123,62 @@ const UploadsList = ({ setSelected, item }) => {
         className="project-cards-container"
         initial={{
           opacity: 0,
-          y: 50
+          y: 50,
         }}
         whileInView={{
           opacity: 1,
           x: 0,
           y: 0,
           transition: {
-            duration: 1
-          }
+            duration: 1,
+          },
         }}
         viewport={{ once: true }}
         exit={{
           opacity: 0,
-          y: -50
+          y: -50,
         }}
       >
-        {filterProjects.map(media => (
+        {filterProjects.map((media) => (
           <div className="project-card" key={media._id}>
             <h3 className="project-name">{media.projectName}</h3>
-            <div className='projDes'>
-              <span> Description: </span><p className="project-description">{media.projectDescription}</p>
+            <div className="projDes">
+              <span> Description: </span>
+              <p className="project-description">{media.projectDescription}</p>
             </div>
             <div className="project-links">
-              <a href={media.deployedLink} target="_blank" rel="noopener noreferrer" className="project-link">
+              <a
+                href={media.deployedLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-link"
+              >
                 View Project
               </a>
               {media.developerInfo ? (
-                <Link to={`/developer/${media.developerInfo.email}`} className="project-link">
-                  <span> Developer </span>{media.developerInfo.name}
+                <Link
+                  to={`/developer/${media.developerInfo.email}`}
+                  className="project-link"
+                >
+                  <span> Developer </span>
+                  {media.developerInfo.name}
                 </Link>
               ) : (
-                <span className="not-available">Developer Info Not Available</span>
+                <span className="not-available">
+                  Developer Info Not Available
+                </span>
               )}
-              <Link to={`/editMedia/${media._id}`} className="action-link">Edit</Link>
+              <Link to={`/editMedia/${media._id}`} className="action-link">
+                Edit
+              </Link>
             </div>
             <div className="videos-container">
               {media.videos.map((video, index) => (
                 <div className="video" key={index}>
-                  <video className="uploaded-video" preload='auto' controls>
-                    <source src={`${backend_Uri}${video.replace(/\\/g, '/')}`} />
+                  <video className="uploaded-video" preload="auto" controls>
+                    <source
+                      src={`${backend_Uri}${video.replace(/\\/g, "/")}`}
+                    />
                     Your browser does not support the video tag.
                   </video>
                 </div>
@@ -163,10 +190,10 @@ const UploadsList = ({ setSelected, item }) => {
       <motion.button
         onClick={() => {
           logout();
-          localStorage.setItem('logedIn', false);
-          localStorage.setItem('signedIn', false)
+          localStorage.setItem("logedIn", false);
+          localStorage.setItem("signedIn", false);
         }}
-        className='logoutbtn'
+        className="logoutbtn"
         whileTap={{ scale: 0.85 }}
       >
         Logout
