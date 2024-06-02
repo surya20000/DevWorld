@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { backend_Uri } from '../config/constants'
 import { useNavigate } from 'react-router-dom'
+import './PatentForm.Module.css';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Motion from './Motion';
@@ -55,11 +56,9 @@ const Users = () => {
             </div>
             <div className={styles.formSection}>
                 <div className={styles.formcontainer}>
-                 <span className={styles.heading}>New to community!</span>
-                        <p className={styles.text}>Let's start your journey as developer</p>
 
                     <form className={styles.formInput}>
-                        <input  name='text' required placeholder='Name' id='Name' onChange={(e) => setName(e.target.value)} className={styles.Name} />
+                        <input type="text" name='text' required placeholder='Name' id='Name' onChange={(e) => setName(e.target.value)} />
                         <input type="email" name='email' id='email' required placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
                         <input type="password" name='name' id='password' required placeholder='Password' className='form-input' onChange={(e) => setPassword(e.target.value)} />
                     </form>
@@ -83,12 +82,9 @@ const Users = () => {
                             <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                         </svg>
                     </motion.button>
-                    <p className={styles.users}>
-                            Dont have an account? <a href="/login">Login</a>
-                        </p>
                     <Link to='/patentForm'><span className={styles.users_a}> Sign up as developer </span></Link>
-                    {successMsg && <Motion text={successMsg} handleClose={handleClose} className={styles.popup_success} />}
-                    {errMsg && <Motion text={errMsg} handleClose={handleClose} className={styles.popup_error} />}
+                    {successMsg && <Motion text={successMsg} handleClose={handleClose} />}
+                    {errMsg && <Motion text={errMsg} handleClose={handleClose} />}
                 </div>
             </div>
         </div>

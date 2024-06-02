@@ -136,3 +136,114 @@ button[type="submit"]:hover {
         opacity: 1;
     }
 }
+
+.project-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.project-card {
+    width: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.project-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.project-description {
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+.project-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.project-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.project-link:hover {
+    text-decoration: underline;
+}
+
+.action-link {
+    color: #28a745;
+    text-decoration: none;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}
+
+.videos-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.video {
+    width: calc(50% - 10px);
+    margin-bottom: 10px;
+}
+
+.uploaded-video {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.uploaded-video:hover {
+    transform: scale(1.05);
+}
+
+.projDes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contribution-statement {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+.contribution-number {
+    font-size: 2rem;
+    color: #ff5722;
+    margin: 0 5px;
+}
+
+.logoutbtn{
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logoutbtn:hover{
+    background-color: #0056b3;
+}
