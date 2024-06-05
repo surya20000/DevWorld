@@ -27,3 +27,4 @@ My low fidelity figma link ---- https://www.figma.com/file/ECOkaI8OCxU1JYIvG5v2D
 - [x] Patent Form For The Developers Project.
 - [x] Video upload and website display integration in the website.
 - [x] Developers special Profile display to the users.  
+
