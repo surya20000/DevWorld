@@ -20,7 +20,7 @@ Dev World is a website designed to provide a platform for developers to showcase
 
 My low fidelity figma link ---- https://www.figma.com/file/ECOkaI8OCxU1JYIvG5v2DT/Untitled?type=design&node-id=0%3A1&mode=design&t=95THxAzmwcpKjPPk-1---
 
-## [Deployed link](https://dev-world-cap.vercel.app/)
+## Deployed Link:- [https://dev-world-cap.vercel.app/](https://dev-world-cap.vercel.app/)
 
 ## Features
 - [x] Third Party Authentication.
