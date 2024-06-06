@@ -20,4 +20,11 @@ Dev World is a website designed to provide a platform for developers to showcase
 
 My low fidelity figma link ---- https://www.figma.com/file/ECOkaI8OCxU1JYIvG5v2DT/Untitled?type=design&node-id=0%3A1&mode=design&t=95THxAzmwcpKjPPk-1---
 
-Deployed link --- https://devworldclient-8sayv0xn1-surya20000s-projects.vercel.app/
+## [Deployed link](https://dev-world-cap.vercel.app/)
+
+## Features
+- [x] Third Party Authentication.
+- [x] Patent Form For The Developers Project.
+- [x] Video upload and website display integration in the website.
+- [x] Developers special Profile display to the users.  
+
