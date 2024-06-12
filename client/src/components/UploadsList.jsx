@@ -40,6 +40,15 @@ const UploadsList = ({ setSelected, item }) => {
       .catch(error => console.log(error));
   };
 
+  const getAllMediaWithDeveloperInfo = async () => {
+    try {
+      const response = await axios.get(`${backend_Uri}/media/allWithDeveloperInfo`);
+      setMediaWithDeveloperInfo(response.data);
+      animate(count, response.data.length, { duration: 1 });
+    } catch (error) {
+      console.error('Error fetching media with developer info:', error);
+    }
+  };
   useEffect(() => {
     getAllMediaWithDeveloperInfo();
     tokenByauth0();
@@ -52,15 +61,6 @@ const UploadsList = ({ setSelected, item }) => {
     }
   }, [getAllMediaWithDeveloperInfo,googleSignIn,location.state,navigate]);
 
-  const getAllMediaWithDeveloperInfo = async () => {
-    try {
-      const response = await axios.get(`${backend_Uri}/media/allWithDeveloperInfo`);
-      setMediaWithDeveloperInfo(response.data);
-      animate(count, response.data.length, { duration: 1 });
-    } catch (error) {
-      console.error('Error fetching media with developer info:', error);
-    }
-  };
 
   const handleSuggestionClick = (projectName) => {
     setSearchProject(projectName);
