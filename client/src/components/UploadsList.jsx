@@ -50,7 +50,7 @@ const UploadsList = ({ setSelected, item }) => {
     if (locallog === "false") {
       navigate('/login');
     }
-  }, []);
+  }, [getAllMediaWithDeveloperInfo,googleSignIn,location.state,navigate]);
 
   const getAllMediaWithDeveloperInfo = async () => {
     try {
