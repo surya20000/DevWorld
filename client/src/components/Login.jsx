@@ -27,7 +27,7 @@ const Login = () => {
       alert("Already Logged In");
       navigate("/");
     }
-  });
+  },[navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -31,7 +31,7 @@ const Users = () => {
         axios.post(`${backend_Uri}/media/createUser`, { name, email, password })
             .then(res => {
                 console.log("Response", res.data)
-                localStorage.setItem("email", res.userInfo.email)
+                localStorage.setItem("email", res.data.userInfo.email)
                 setSuccessMsg("User Created Successfully")
                 localStorage.setItem("signedIn",true)
                 seterrMsg("")
@@ -41,8 +41,10 @@ const Users = () => {
                 console.log("Error", error)
                 if (error.response && error.response.data && error.response.data.error) {
                     seterrMsg(error.response.data.error.map(err => err.message).join(", "));
+                    setSuccessMsg("");
                 } else {
                     seterrMsg("Error adding info. Please try again.");
+                    setSuccessMsg("");
                 }
                 setSuccessMsg("");
             })
